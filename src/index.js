@@ -1,6 +1,5 @@
 require('./patch');
 
-var drafter = require('drafter');
 var hercule = require('hercule');
 var fs = require('fs');
 var pug = require('pug');
@@ -65,7 +64,7 @@ module.exports = function(options) {
 }
 
 function setHost(result) {
-	var metas = at(result, 'content.0.attributes.meta');
+	var metas = at(result, 'content.0.attributes.metadata.content');
 	if (metas && metas.find) {
 		var hostMeta = metas.find(function(m) {
 			return at(m, 'content.key.content') === 'HOST';

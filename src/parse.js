@@ -166,21 +166,24 @@ module.exports = function parse(result, current, parent) {
 
 function getMeta(meta) {
 	meta = meta || {};
-	var claz = '';
-	if (meta.classes && Array.isArray(meta.classes)) {
-		claz = meta.classes[0]
+	var claz, title = '';
+	if (meta.classes && Array.isArray(meta.classes.content)) {
+		claz = meta.classes.content[0].content
+	}
+	if (meta.title) {
+		title = meta.title.content
 	}
 	return {
 		class: claz,
-		title: meta.title
+		title: title
 	}
 }
 
 function getProps(props){
 	props = props || {};
-	var url = props.href;
-	var statusCode = props.statusCode;
-	var method = props.method;
+	var url = props.href ? props.href.content : undefined;
+	var statusCode = props.statusCode ? props.statusCode.content : undefined;
+	var method = props.method ? props.method.content : undefined;
 	var urlParameters = [];
 	var headers = [];
 	var data = '';
