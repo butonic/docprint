@@ -32,14 +32,7 @@ module.exports = function(options) {
 	}
 
 	try {
-		var relativePath = path.resolve(filePath);
-		relativePath = relativePath.substring(0, relativePath.lastIndexOf('/'));
-	  	var result = drafter.parseSync(
-	  		hercule.transcludeStringSync(fs.readFileSync(filePath).toString(), {
-	  			relativePath: relativePath
-	  		}), {
-	  		requireBlueprintName: true
-	  	});
+	  	var result = JSON.parse(fs.readFileSync(filePath, 'utf8'));
 	  	setHost(result);
 	  	var output = {};
 	  	parse(result, output);
